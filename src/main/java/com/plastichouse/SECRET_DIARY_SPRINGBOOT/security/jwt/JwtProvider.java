@@ -17,16 +17,16 @@ public class JwtProvider {
     private final JwtProperties jwtProperties;
 
     //토큰 생성
-    public TokenResponse generateToken(String username) {
+    public TokenResponse generateToken(String nickname) {
         return new TokenResponse(
-          generateToken(username, jwtProperties.getAccessExp(), JwtProperties.ACCESS_TYPE)
+          generateToken(nickname, jwtProperties.getAccessExp())
         );
     }
 
-    private String generateToken(String username, Long expiration, String type) {
+    private String generateToken(String nickname, Long expiration) {
         return Jwts.builder()
-                .setSubject(username)
-                .setHeaderParam("typ", type)
+                .setSubject(nickname)
+                .setHeaderParam("typ", JwtProperties.ACCESS_TYPE)
                 .signWith(SignatureAlgorithm.HS256, jwtProperties.getSecretKey())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + expiration))
