@@ -17,9 +17,9 @@ public class JwtProvider {
     private final JwtProperties jwtProperties;
 
     //토큰 생성
-    public TokenResponse generateToken(String username) {
+    public TokenResponse generateToken(String nickname) {
         String accessToken = Jwts.builder()
-                .setSubject(username)
+                .setSubject(nickname)
                 .setHeaderParam("typ", JwtProperties.ACCESS_TYPE)
                 .signWith(SignatureAlgorithm.HS256, jwtProperties.getSecretKey())
                 .setIssuedAt(new Date())
