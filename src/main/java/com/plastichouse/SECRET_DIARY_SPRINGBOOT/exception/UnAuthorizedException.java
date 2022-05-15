@@ -9,6 +9,8 @@ public class UnAuthorizedException extends GlobalException {
 
     public static final UnAuthorizedException EXPIRED_TOKEN = new UnAuthorizedException("Expired token");
 
+    public static final UnAuthorizedException NOT_AUTHENTICATED = new UnAuthorizedException("User not authenticated");
+
     private UnAuthorizedException(String message) {
         super(HttpStatus.UNAUTHORIZED.value(), message);
     }
