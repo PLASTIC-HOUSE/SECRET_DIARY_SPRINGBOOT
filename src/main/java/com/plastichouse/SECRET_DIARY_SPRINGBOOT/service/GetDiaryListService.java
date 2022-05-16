@@ -7,11 +7,13 @@ import com.plastichouse.SECRET_DIARY_SPRINGBOOT.entity.user.User;
 import com.plastichouse.SECRET_DIARY_SPRINGBOOT.facade.AuthenticationFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 @Service
 public class GetDiaryListService {
 
