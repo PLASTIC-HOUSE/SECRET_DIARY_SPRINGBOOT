@@ -33,6 +33,10 @@ dependencies {
 	//db
 	implementation 'mysql:mysql-connector-java'
 
+	//swqgger
+	implementation 'io.springfox:springfox-boot-starter:3.0.0'
+	implementation 'io.springfox:springfox-swagger-ui:3.0.0'
+
 	//querydsl
 	implementation 'com.querydsl:querydsl-jpa'
 	annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa"
