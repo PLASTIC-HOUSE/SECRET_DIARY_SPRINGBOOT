@@ -2,9 +2,9 @@ spring:
   jackson:
     property-naming-strategy: SNAKE_CASE
   datasource:
-    url: ${DB_URL}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    url: jdbc:mysql://3.35.128.136:3306/secretdiarydb
+    username: root
+    password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     database: mysql
@@ -16,7 +16,13 @@ spring:
     properties:
       hibernate:
         format_sql: true #??? ???? ????.
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
 
 jwt:
   secret-key: ${JWT_SECRET_KEY:asdf}
   access-exp: ${JWT_ACCESS_EXP:123456}
+
+server:
+  port: 80
