@@ -5,8 +5,11 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.UUID;
 
@@ -22,14 +25,20 @@ public class AmazonS3Facade {
 
     private final AmazonS3 amazonS3;
 
-    public String uploadImage(MultipartFile file) {
+    public String uploadImage(BufferedImage image) {
         String uploadImagePath = baseImageUrl + UUID.randomUUID() + ".jpg";
+        File file = new File(uploadImagePath);
+        try {
+            ImageIO.write(image, "jpg", file);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         try {
             amazonS3.putObject(new PutObjectRequest(
                     bucketName,
                     uploadImagePath,
-                    file.getInputStream(),
+                    new FileInputStream(file),
                     null
             ));
         } catch (IOException e) {
