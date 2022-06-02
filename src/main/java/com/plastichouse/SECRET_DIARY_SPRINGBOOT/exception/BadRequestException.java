@@ -5,6 +5,8 @@ import org.springframework.http.HttpStatus;
 
 public class BadRequestException extends GlobalException {
 
+    public static final BadRequestException INVALID_FILE_REQUEST = new BadRequestException("Check files");
+
     private BadRequestException(String message) {
         super(HttpStatus.BAD_REQUEST.value(), message);
     }
