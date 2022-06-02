@@ -13,7 +13,10 @@ import javax.persistence.Entity;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User extends BaseIdEntity {
 
-    @Column(length = 30, unique = true)
+    @Column(length = 30, nullable = false, unique = true)
     private String nickname;
+
+    @Column(nullable = false, unique = true)
+    private String imageUrl;
 
 }
