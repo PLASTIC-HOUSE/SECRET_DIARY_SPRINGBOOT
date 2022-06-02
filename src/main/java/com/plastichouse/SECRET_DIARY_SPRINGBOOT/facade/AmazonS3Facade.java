@@ -6,8 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -25,14 +23,8 @@ public class AmazonS3Facade {
 
     private final AmazonS3 amazonS3;
 
-    public String uploadImage(BufferedImage image) {
+    public String uploadImage(File file) {
         String uploadImagePath = baseImageUrl + UUID.randomUUID() + ".jpg";
-        File file = new File(uploadImagePath);
-        try {
-            ImageIO.write(image, "jpg", file);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
 
         try {
             amazonS3.putObject(new PutObjectRequest(

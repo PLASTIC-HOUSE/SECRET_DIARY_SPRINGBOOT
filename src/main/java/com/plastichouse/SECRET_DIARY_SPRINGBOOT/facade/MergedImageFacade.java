@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Component
@@ -26,7 +27,7 @@ public class MergedImageFacade {
         BufferedImage[] bufferedImages = new BufferedImage[5];
         for (int i = 0; i < 5; i++) {
             try {
-                bufferedImages[i] = ImageIO.read((File) files.get(i));
+                bufferedImages[i] = ImageIO.read(files.get(i).getInputStream());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -37,13 +38,22 @@ public class MergedImageFacade {
         Graphics2D graphics2D = mergedImage.createGraphics();
         graphics2D.setBackground(Color.BLACK);
         for (int i = 0, w = 0, h = 0; i < FILE_SIZE; i++) {
-            if (i % 2 != 0) w = IMAGE_WIDTH;
+            w = IMAGE_WIDTH * (i % 2);
             if (i > 0 && i % 2 == 0) h += IMAGE_HEIGHT;
 
             graphics2D.drawImage(bufferedImages[i], w, h, null);
         }
 
-        return amazonS3Facade.uploadImage(mergedImage);
+        File file = new File(System.getProperty("user.dir") + "/" + UUID.randomUUID() + ".jpg");
+        try {
+            ImageIO.write(mergedImage, "jpg", file);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        String imageUrl = amazonS3Facade.uploadImage(file);
+        file.delete();
+        return imageUrl;
     }
 
 }
