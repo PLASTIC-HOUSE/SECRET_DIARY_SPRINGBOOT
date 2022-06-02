@@ -21,7 +21,7 @@ public class RegisterService {
     private final MergedImageFacade mergedImageFacade;
 
     public void register(String nickname, List<MultipartFile> files) {
-        if (files != null && files.size() != 5) {
+        if (files.size() != 5) {
                 throw BadRequestException.INVALID_FILE_REQUEST;
         }
 
