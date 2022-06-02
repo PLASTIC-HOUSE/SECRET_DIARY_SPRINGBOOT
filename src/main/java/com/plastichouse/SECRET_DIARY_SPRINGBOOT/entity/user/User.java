@@ -19,4 +19,12 @@ public class User extends BaseIdEntity {
     @Column(nullable = false, unique = true)
     private String imageUrl;
 
+    public static User createUser(String nickname, String imageUrl) {
+        User user = new User();
+        user.nickname = nickname;
+        user.imageUrl = imageUrl;
+
+        return user;
+    }
+
 }
