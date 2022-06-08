@@ -1,6 +1,7 @@
 package com.plastichouse.SECRET_DIARY_SPRINGBOOT.facade;
 
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,13 +26,16 @@ public class AmazonS3Facade {
 
     public String uploadImage(File file) {
         String uploadImagePath = UUID.randomUUID() + ".jpg";
+        ObjectMetadata md = new ObjectMetadata();
+
+        md.setContentType("image/jpeg");
 
         try {
             amazonS3.putObject(new PutObjectRequest(
                     bucketName,
                     uploadImagePath,
                     new FileInputStream(file),
-                    null
+                    md
             ));
         } catch (IOException e) {
             throw new RuntimeException(e);
