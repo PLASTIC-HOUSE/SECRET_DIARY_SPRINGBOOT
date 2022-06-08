@@ -24,7 +24,7 @@ public class AmazonS3Facade {
     private final AmazonS3 amazonS3;
 
     public String uploadImage(File file) {
-        String uploadImagePath = baseImageUrl + UUID.randomUUID() + ".jpg";
+        String uploadImagePath = UUID.randomUUID() + ".jpg";
 
         try {
             amazonS3.putObject(new PutObjectRequest(
@@ -37,7 +37,7 @@ public class AmazonS3Facade {
             throw new RuntimeException(e);
         }
 
-        return uploadImagePath;
+        return baseImageUrl + uploadImagePath;
     }
 
 }
