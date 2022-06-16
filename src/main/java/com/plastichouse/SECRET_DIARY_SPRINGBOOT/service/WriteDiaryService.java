@@ -1,6 +1,6 @@
 package com.plastichouse.SECRET_DIARY_SPRINGBOOT.service;
 
-import com.plastichouse.SECRET_DIARY_SPRINGBOOT.dto.request.WriteLetterRequest;
+import com.plastichouse.SECRET_DIARY_SPRINGBOOT.dto.request.WriteDiaryRequest;
 import com.plastichouse.SECRET_DIARY_SPRINGBOOT.entity.diary.Diary;
 import com.plastichouse.SECRET_DIARY_SPRINGBOOT.entity.diary.DiaryRepository;
 import com.plastichouse.SECRET_DIARY_SPRINGBOOT.entity.user.User;
@@ -12,13 +12,13 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Transactional
 @Service
-public class WriteLetterService {
+public class WriteDiaryService {
 
     private final DiaryRepository diaryRepository;
 
     private final AuthenticationFacade authenticationFacade;
 
-    public void execute(WriteLetterRequest request) {
+    public void execute(WriteDiaryRequest request) {
         User user = authenticationFacade.getUser();
 
         diaryRepository.save(

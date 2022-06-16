@@ -1,11 +1,11 @@
 package com.plastichouse.SECRET_DIARY_SPRINGBOOT.contorller;
 
-import com.plastichouse.SECRET_DIARY_SPRINGBOOT.dto.request.WriteLetterRequest;
+import com.plastichouse.SECRET_DIARY_SPRINGBOOT.dto.request.WriteDiaryRequest;
 import com.plastichouse.SECRET_DIARY_SPRINGBOOT.dto.response.GetDiaryDetailsResponse;
 import com.plastichouse.SECRET_DIARY_SPRINGBOOT.dto.response.GetDiaryListResponse;
 import com.plastichouse.SECRET_DIARY_SPRINGBOOT.service.GetDiaryDetailsService;
 import com.plastichouse.SECRET_DIARY_SPRINGBOOT.service.GetDiaryListService;
-import com.plastichouse.SECRET_DIARY_SPRINGBOOT.service.WriteLetterService;
+import com.plastichouse.SECRET_DIARY_SPRINGBOOT.service.WriteDiaryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -24,9 +24,9 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 @RequestMapping("/letter")
 @RestController
-public class LetterController {
+public class DiaryController {
 
-    private final WriteLetterService writeLetterService;
+    private final WriteDiaryService writeDiaryService;
 
     private final GetDiaryListService getDiaryListService;
 
@@ -35,8 +35,8 @@ public class LetterController {
     @Operation(tags = "일기", summary = "일기 작성")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public void writeLetter(@RequestBody @Valid WriteLetterRequest request) {
-        writeLetterService.execute(request);
+    public void writeDiary(@RequestBody @Valid WriteDiaryRequest request) {
+        writeDiaryService.execute(request);
     }
 
     @Operation(tags = "일기", summary = "일기 목록")

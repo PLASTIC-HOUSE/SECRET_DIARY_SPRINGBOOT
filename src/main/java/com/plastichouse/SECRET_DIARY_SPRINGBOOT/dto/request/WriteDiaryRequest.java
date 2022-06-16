@@ -8,7 +8,7 @@ import org.hibernate.validator.constraints.Length;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class WriteLetterRequest {
+public class WriteDiaryRequest {
 
     @Schema(description = "제목", minLength = 2, maxLength = 30, required = true)
     @Length(min = 2, max = 30)
