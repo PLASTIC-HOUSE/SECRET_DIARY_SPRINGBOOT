@@ -47,13 +47,13 @@ public class MergedImageFacade {
         File file = new File(System.getProperty("user.dir") + "/" + UUID.randomUUID() + ".jpg");
         try {
             ImageIO.write(mergedImage, "jpg", file);
+            String imageUrl = amazonS3Facade.uploadImage(file);
+            file.delete();
+
+            return imageUrl;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-        String imageUrl = amazonS3Facade.uploadImage(file);
-        file.delete();
-        return imageUrl;
     }
 
 }
