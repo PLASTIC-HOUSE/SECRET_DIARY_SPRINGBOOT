@@ -22,7 +22,7 @@ import javax.validation.Valid;
 
 @Tag(name = "일기", description = "일기 작성 및 가져오기")
 @RequiredArgsConstructor
-@RequestMapping("/letter")
+@RequestMapping("/diary")
 @RestController
 public class DiaryController {
 
